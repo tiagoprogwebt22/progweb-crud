@@ -1,3 +1,8 @@
+<?php
+require '../includes/funcoes-produtos.php';
+$listaDeProdutos = lerProdutos($conexao);
+var_dump($listaDeProdutos);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
