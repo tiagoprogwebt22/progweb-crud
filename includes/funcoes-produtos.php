@@ -31,17 +31,15 @@ function inserirProduto($conexao, $nome, $preco, $quantidade,
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
 
-function lerUmProduto($conexao, $id){
-    // Montagem do comando SQL com o parâmetro id
-    $sql = "SELECT id, nome FROM fabricantes WHERE id = $id";
+function lerUmProduto($conexao, $id){    
+    $sql = "SELECT id, nome, preco, quantidade, descricao, fabricante_id
+     FROM produtos WHERE id = $id";
     
-    // Execução do comando e armazenamento do resultado
     $resultado = mysqli_query($conexao, $sql) 
                 or die(mysqli_error($conexao));
-
-    // Retornando para fora da função o resultado como array assoc.
+    
     return mysqli_fetch_assoc($resultado);
-} // final lerUmFabricante
+} // final lerUmProduto
 
 
 

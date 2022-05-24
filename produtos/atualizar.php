@@ -1,3 +1,11 @@
+<?php
+require '../includes/funcoes-fabricantes.php';
+require '../includes/funcoes-produtos.php';
+$listaDeFabricantes = lerFabricantes($conexao);
+
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$produto = lerUmProduto($conexao, $id);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,29 +28,37 @@
     <form action="" method="post"> 
         
         <p><label for="nome">Nome:</label>
-	    <input value="" type="text" name="nome" id="nome" required></p>
+	    <input value="<?=$produto['nome']?>" type="text" name="nome" id="nome" required></p>
 
         <p>
             <label for="fabricante">Fabricante:</label>
             <select name="fabricante" id="fabricante" required>
                 <option value=""></option>
                 
-                <option value="">
-                
+                <?php foreach($listaDeFabricantes as $fabricante){ ?>                
+                <option 
+                <?php 
+                if($produto['fabricante_id'] == $fabricante['id']) {
+                    echo "selected";
+                }
+                ?>
+                 value="<?=$fabricante['id']?>"> 
+                    <?=$fabricante['nome']?>
                 </option>
+                <?php } ?>
             
             </select>
         </p>
 
 
         <p><label for="preco">Preço:</label>
-	    <input value="" type="number" name="preco" id="preco" min="0" max="10000" step="0.01" required></p>
+	    <input value="<?=$produto['preco']?>" type="number" name="preco" id="preco" min="0" max="10000" step="0.01" required></p>
 
         <p><label for="quantidade">Quantidade:</label>
-	    <input value="" type="number" name="quantidade" id="quantidade" min="0" max="50" step="1" required></p>
+	    <input value="<?=$produto['quantidade']?>" type="number" name="quantidade" id="quantidade" min="0" max="50" step="1" required></p>
         
 	    <p><label for="descricao">Descrição:</label> <br>
-	    <textarea name="descricao" id="descricao" rows="3" cols="40" maxlength="500" required></textarea>
+	    <textarea name="descricao" id="descricao" rows="3" cols="40" maxlength="500" required><?=$produto['descricao']?></textarea>
         </p>
 	    
 
