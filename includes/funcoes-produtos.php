@@ -53,7 +53,7 @@ function atualizarProduto($conexao, $id, $nome){
 
 
 function excluirProduto($conexao, $id) {
-    $sql = "DELETE FROM fabricantes WHERE id = $id";
+    $sql = "DELETE FROM produtos WHERE id = $id";
     mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
 }
 
