@@ -54,7 +54,10 @@ function atualizarFabricante($conexao, $id, $nome){
 
 function excluirFabricante($conexao, $id) {
     $sql = "DELETE FROM fabricantes WHERE id = $id";
-    mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+    // mysqli_query($conexao, $sql) or die(mysqli_error($conexao));
+    if( !mysqli_query($conexao, $sql) ){
+        die("<p>Não é possível apagar este fabricante porque há produtos associados a ele.</p><p><a href='listar.php'>Voltar para lista</a></p>");
+    }
 }
 
 
